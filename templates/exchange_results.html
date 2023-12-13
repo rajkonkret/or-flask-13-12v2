@@ -6,5 +6,8 @@
 </head>
 <body>
     <h1>You selected {{ currency }} and amount {{ amount }}</h1>
+    {% if currency== 'EUR' %}
+        <img src="{{ url_for('static', filename='flag_pirat.png') }}">
+    {% endif %}
 </body>
 </html>
