@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'SomthingWhatNoICanGuess'
 
 class Currency:
 
@@ -17,12 +17,14 @@ class Currency:
 class CantorOffer:
     def __init__(self):
         self.currencies = []
+        self.denied_codes = []
 
     def load_offer(self):
         self.currencies.append(Currency('USD', 'Dollar', 'flag_usa.png'))
         self.currencies.append(Currency('EUR', 'Euro', 'flag_euro.png'))
         self.currencies.append(Currency('JPY', 'Yen', 'flag_japan.png'))
         self.currencies.append(Currency('GBP', 'Pound', 'flag_uk.png'))
+        self.denied_codes.append('USD')
 
     def get_by_code(self, code):
         for currency in self.currencies:
@@ -47,6 +49,13 @@ def exchange():
         currency = 'EUR'
         if 'currency' in request.form:
             currency = request.form['currency']
+
+        if currency in offer.denied_codes:
+            flash(f"The currency {currency} cannot be accepted")
+        elif offer.get_by_code(currency) == 'unknown':
+            flash(f"the selected currency is unknown and cannot be accepted")
+        else:
+            flash(f"Request to chchange {currency} was accepted")
 
         amount = 100
         if 'amount' in request.form:
