@@ -3,7 +3,7 @@
 {% endmacro %}
 
 {% macro show_all_flash_message() %}
-    {% for message in get_flashed_message() %}
+    {% for message in get_flashed_messages() %}
         {{ show_flash_message(message) }}
     {% endfor %}
 {% endmacro %}
