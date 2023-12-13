@@ -22,7 +22,7 @@ class CantorOffer:
         self.currencies.append(Currency('USD', 'Dollar', 'flag_usa.png'))
         self.currencies.append(Currency('EUR', 'Euro', 'flag_euro.png'))
         self.currencies.append(Currency('JPY', 'Yen', 'flag_japan.png'))
-        self.currencies.append(Currency('GPB', 'Pound', 'flag_uk.png'))
+        self.currencies.append(Currency('GBP', 'Pound', 'flag_uk.png'))
 
     def get_by_code(self, code):
         for currency in self.currencies:
@@ -52,7 +52,8 @@ def exchange():
         if 'amount' in request.form:
             amount = request.form['amount']
 
-        return render_template('exchange_results.html', currency=currency, amount=amount)
+        return render_template('exchange_results.html', currency=currency, amount=amount,
+                               currency_info=offer.get_by_code(currency))
 
 
 if __name__ == '__main__':
