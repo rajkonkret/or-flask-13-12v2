@@ -46,6 +46,7 @@ def exchange():
     if request.method == 'GET':
         return render_template('exchange.html', offer=offer)
     else:
+        flash("Debug mode")
         currency = 'EUR'
         if 'currency' in request.form:
             currency = request.form['currency']
