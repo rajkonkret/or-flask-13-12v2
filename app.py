@@ -8,6 +8,7 @@ def index():
     return "This is index"
 
 
+@app.route('/exchange', methods=['GET', 'POST'])
 def exchange():
     return render_template('exchange.html')
 
