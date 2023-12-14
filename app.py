@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SomthingWhatNoICanGuess'
 
+
 class Currency:
 
     def __init__(self, code, name, flag):
@@ -35,7 +36,8 @@ class CantorOffer:
 
 @app.route("/")
 def index():
-    return "This is index"
+    # return "This is index"
+    return render_template("index.html")
 
 
 @app.route('/exchange', methods=['GET', 'POST'])
